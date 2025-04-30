@@ -1,0 +1,13 @@
+infrastructureDefinition:
+  name: sd-demo-harness
+  identifier: sddemoharness
+  orgIdentifier: TCS
+  projectIdentifier: devops001
+  environmentRef: sddemo
+  deploymentType: NativeHelm
+  type: KubernetesDirect
+  spec:
+    connectorRef: harnessdemo
+    namespace: sd-demo
+    releaseName: release-<+INFRA_KEY_SHORT_ID>
+  allowSimultaneousDeployments: false
