@@ -36,7 +36,7 @@ pipeline:
                   name: BuildAndPushDockerRegistry_1
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
-                    connectorRef: account.harnessImage
+                    connectorRef: sddemo
                     repo: mail2sandeepd/harness-demo
                     tags:
                       - sd-v2
