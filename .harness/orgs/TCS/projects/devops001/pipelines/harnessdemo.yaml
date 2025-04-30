@@ -49,14 +49,6 @@ pipeline:
           deploymentType: NativeHelm
           service:
             serviceRef: sdhelmsvc
-            serviceInputs:
-              serviceDefinition:
-                type: NativeHelm
-                spec:
-                  variables:
-                    - name: NAMESPACE
-                      type: String
-                      value: <+input>
           environment:
             environmentRef: harnessdemoenv
             deployToAll: false
