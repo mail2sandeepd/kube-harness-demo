@@ -40,3 +40,54 @@ pipeline:
                     repo: mail2sandeepd/harness-demo
                     tags:
                       - sd-v2
+    - stage:
+        name: demo-deploy
+        identifier: demodeploy
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: NativeHelm
+          service:
+            serviceRef: sdhelmsvc
+            serviceInputs:
+              serviceDefinition:
+                type: NativeHelm
+                spec:
+                  variables:
+                    - name: NAMESPACE
+                      type: String
+                      value: <+input>
+          environment:
+            environmentRef: harnessdemoenv
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: harnessdemoinfra
+                inputs:
+                  identifier: harnessdemoinfra
+                  type: KubernetesDirect
+                  spec:
+                    namespace: <+input>
+          execution:
+            steps:
+              - step:
+                  type: HelmDeploy
+                  name: HelmDeploy_1
+                  identifier: HelmDeploy_1
+                  spec:
+                    skipDryRun: false
+                    ignoreReleaseHistFailStatus: false
+                  timeout: 10m
+            rollbackSteps:
+              - step:
+                  name: Helm Rollback
+                  identifier: helmRollback
+                  type: HelmRollback
+                  timeout: 10m
+                  spec: {}
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
