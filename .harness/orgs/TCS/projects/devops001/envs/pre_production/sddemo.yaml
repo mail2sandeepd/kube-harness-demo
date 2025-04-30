@@ -1,0 +1,8 @@
+environment:
+  name: sd-demo
+  identifier: sddemo
+  description: ""
+  tags: {}
+  type: PreProduction
+  orgIdentifier: TCS
+  projectIdentifier: devops001
